@@ -7,10 +7,10 @@
 
 import Foundation
 
-public enum Loadable<Item, Failure>: Equatable where Item: Codable, Item: Equatable, Failure: Error, Failure: Equatable {
+public enum Loadable<Item>: Equatable where Item: Codable, Item: Equatable {
     case none
     case loading
     case refreshing
-    case error(Failure)
+    case error(APIError)
     case loaded(Item)
 }
