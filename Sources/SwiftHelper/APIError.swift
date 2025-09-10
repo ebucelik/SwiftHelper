@@ -7,34 +7,36 @@
 
 import Foundation
 
-public enum APIError: Error {
-    case error(Error)
-    case unexpectedError(String)
-    case notFound
-    case notModified
+enum APIError: Error, Equatable {
+    case decoding
+    case response
+    case invalidRequest
+    case invalidUrl
+    case requestFailed(Error)
     case unauthorized
-    case unknown
-}
+    case general
 
-extension APIError: Equatable {
-    public static func == (lhs: APIError, rhs: APIError) -> Bool {
+    static func == (lhs: APIError, rhs: APIError) -> Bool {
         switch (lhs, rhs) {
-        case let (.error(lhsError), .error(rhsError)):
-            return lhsError.localizedDescription == rhsError.localizedDescription
-
-        case let (.unexpectedError(lhsError), .unexpectedError(rhsError)):
-            return lhsError == rhsError
-
-        case (.notFound, .notFound):
+        case (.decoding, .decoding):
             return true
 
-        case (.notModified, .notModified):
+        case (.response, .response):
+            return true
+
+        case (.invalidRequest, .invalidRequest):
+            return true
+
+        case (.invalidUrl, .invalidUrl):
+            return true
+
+        case (.requestFailed, .requestFailed):
             return true
 
         case (.unauthorized, .unauthorized):
             return true
 
-        case (.unknown, .unknown):
+        case (.general, .general):
             return true
 
         default:
