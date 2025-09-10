@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum APIError: Error, Equatable {
+public enum APIError: Error, Equatable {
     case decoding
     case response
     case invalidRequest
@@ -16,7 +16,7 @@ enum APIError: Error, Equatable {
     case unauthorized
     case general
 
-    static func == (lhs: APIError, rhs: APIError) -> Bool {
+    public static func == (lhs: APIError, rhs: APIError) -> Bool {
         switch (lhs, rhs) {
         case (.decoding, .decoding):
             return true
